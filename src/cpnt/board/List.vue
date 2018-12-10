@@ -60,6 +60,7 @@
           <div>
             <i class="fas fa-edit" @click="editItem(props.item)"></i>
             <i class="fas fa-trash-alt" @click="deleteItem(props.item)"></i>
+            <!-- {{ props.item.key }} -->
           </div>  
         </td>
       </template>
@@ -141,8 +142,8 @@ import firebase from '../../../Firebase'
       },
 
       editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
+        this.editedIndex = this.desserts.indexOf(item) //인덱스 => key로 대체
+        this.editedItem = Object.assign({}, item) //
         this.dialog = true
       },
 
