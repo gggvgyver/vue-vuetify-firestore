@@ -1,6 +1,7 @@
 <template>
   <div>
     추가
+    <v-btn @click="$router.push({ name: 'list'})">링크-리스트-파라미터이용</v-btn>
   </div>
 </template>
 

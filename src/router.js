@@ -8,6 +8,11 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      name: 'home',
+      component: () => import('./cpnt/Home')
+    },
+    {
       path: '/list',
       name: 'list',
       component: () => import('./cpnt/board/List')

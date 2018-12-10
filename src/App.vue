@@ -1,29 +1,56 @@
 <template>
-  <v-app>
-    <v-navigation-drawer app>네비드로어
-      <v-btn @click="$router.push('/')">링크-홈</v-btn>
-      <v-btn @click="$router.push('/list')">링크-리스트</v-btn>
-      <v-btn @click="$router.push('/add')">링크-추가</v-btn>
-      <v-btn @click="$router.push({ name: 'list'})">링크-리스트-파라미터이용</v-btn>
-      <router-link :to="{name: 'list'}">링크-리스트-라우터링크이용</router-link>
-      <!-- <v-list-tile router :to="{name: '/'}"> -->
+  <v-app id="inspire" dark>
+    <v-navigation-drawer
+      v-model="drawer"
+      clipped
+      fixed
+      app
+    >
+      <v-list dense>
+        <v-list-tile router :to="{name: 'home'}">
+          <v-list-tile-action>
+            <i class="fas fa-clipboard-list"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>홈</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile router :to="{name: 'list'}">
+          <v-list-tile-action>
+            <i class="fas fa-monument"></i>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Firestore 게시판</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </v-list>
     </v-navigation-drawer>
-    <v-toolbar app>툴바</v-toolbar>
+    <v-toolbar app fixed clipped-left>
+      <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-title>Vue 연습</v-toolbar-title>
+    </v-toolbar>
     <v-content>
-      <v-container fluid>
-        <router-view></router-view>
+      <v-container fluid fill-height>
+        <v-layout justify-center align-center>
+          <v-flex shrink>
+            <router-view></router-view>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-content>
-    <v-footer app>푸터</v-footer>
+    <v-footer app fixed>
+      <span>&copy; 2017 / 12 / 10</span>
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-export default {
-  methods: {
-    linkTest () {
-      $router.push({ name: 'show', params: { id: 1 }})
+  export default {
+    data: () => ({
+      drawer: null
+    }),
+    props: {
+      source: String
     }
   }
-}
 </script>

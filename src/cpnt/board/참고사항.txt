@@ -1,0 +1,26 @@
+List => Show (id값)
+<v-list-title router :to="{
+    name: '라우터네임',
+    params: {
+        변수1: 값1,
+        변수2: 값2
+    }
+}>
+-------------------------------------------------------------------------------------
+  created () {
+    console.log("router 설명", this.$router)
+    console.log("route 설명", this.$route)
+  }
+--------------------------------------------------------------------------------------  
+      <v-btn @click="$router.push('/')">링크-홈</v-btn>
+      <v-btn @click="$router.push('/list')">링크-리스트</v-btn>
+      <v-btn @click="$router.push('/add')">링크-추가</v-btn>
+      <v-btn @click="$router.push({ name: 'list'})">링크-리스트-파라미터이용</v-btn>
+      <router-link :to="{name: 'list'}">링크-리스트-라우터링크이용</router-link>
+      <!-- <v-btn @click="linkTest">메소드를 이용해서</v-btn> -->
+      <!-- <v-list-tile router :to="{name: '/'}"> -->
+--------------------------------------------------------------------------------------
+firestore 컬렉션과 필드
+컬렉션: boards
+필드: author, description, title
+--------------------------------------------------------------------------------------

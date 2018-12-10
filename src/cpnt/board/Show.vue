@@ -1,6 +1,6 @@
 <template>
   <div>
-    보기
+    보기 {{ board.author }}
   </div>
 </template>
 
