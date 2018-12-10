@@ -143,13 +143,18 @@ import firebase from '../../../Firebase'
 
       editItem (item) {
         this.editedIndex = this.desserts.indexOf(item) //인덱스 => key로 대체
-        this.editedItem = Object.assign({}, item) //
+        this.editedItem = Object.assign({}, item) //삭제
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item)
+        const index = this.desserts.indexOf(item) //인덱스 => props.item.key
         confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+        // this.ref.doc(item).delete().then(function() {
+        // console.log('삭제완료');  
+        // }).catch(function(error) {
+        // console.error('삭제실패: ', error);  
+        //});
       },
 
       close () {
