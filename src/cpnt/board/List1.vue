@@ -18,7 +18,7 @@ export default {
       },
       boards: [],
       errors: [],
-      ref: firebase.firestore().collection('boards'),
+      ref: firebase.firestore().collection('dessert'),
     }
   },
   created () {
@@ -27,7 +27,11 @@ export default {
       querySnapshot.forEach((doc) => {
         this.boards.push({
           key: doc.id,
-          title: doc.data().title
+          name: doc.data().name,
+          calories: doc.data().calories,
+          fat: doc.data().fat,
+          carbs: doc.data().carbs,
+          protein: doc.data().protein
         });
       });
     });

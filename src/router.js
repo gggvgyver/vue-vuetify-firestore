@@ -18,6 +18,11 @@ export default new Router({
       component: () => import('./cpnt/board/List')
     },
     {
+      path: '/list1',
+      name: 'list1',
+      component: () => import('./cpnt/board/List1')
+    },
+    {
       path: '/add',
       name: 'add',
       component: () => import('./cpnt/board/Add')
