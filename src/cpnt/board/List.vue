@@ -229,12 +229,10 @@
 </script>
 
 <style scoped>
-
-
 i {
-    margin-left: 10px;
-    font-size: 30px;
-    height: 10px;
+    margin-left: 5px;
+    font-size: 25px;
+    height: 5px;
     vertical-align: middle;
 }
 </style>
