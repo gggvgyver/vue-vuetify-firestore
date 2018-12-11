@@ -58,8 +58,8 @@
         <td class="text-xs-right">{{ props.item.protein }}</td>
         <td class="justify-center layout px-0">
           <div>
-            <i class="fas fa-edit" @click="editItem(props.item)"></i>
-            <i class="fas fa-trash-alt" @click="deleteItem(props.item)"></i>
+            <i class="fas fa-edit" @click="editItem(props.item, props.item.key)"></i>
+            <i class="fas fa-trash-alt" @click="deleteItem(props.item.key)"></i>
             <!-- {{ props.item.key }} -->
           </div>  
         </td>
@@ -141,21 +141,31 @@ import firebase from '../../../Firebase'
         });
       },
 
-      editItem (item) {
+      editItem (item, itemkey) {
         this.editedIndex = this.desserts.indexOf(item) //인덱스 => key로 대체
+        //this.editedIndex = this.desserts.item.key
         this.editedItem = Object.assign({}, item) //삭제
+        this.itemkey = itemkey
         this.dialog = true
       },
 
       deleteItem (item) {
-        const index = this.desserts.indexOf(item) //인덱스 => props.item.key
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+        //console.log(item)
+        //const index = this.desserts.indexOf(item) //인덱스 => props.item.key
+        //console.log(index)
+        //confirm('Are you sure you want to delete this item???') && this.desserts.splice(index, 1)
         // this.ref.doc(item).delete().then(function() {
         // console.log('삭제완료');  
         // }).catch(function(error) {
         // console.error('삭제실패: ', error);  
         //});
-      },
+        confirm('정말 삭제 하시겠습니까?') &&
+        this.ref.doc(item).delete().then(function() {
+        console.log('삭제완료')
+        }).catch(function(error) {
+         console.error('삭제실패: ', error)
+      }
+    ) },
 
       close () {
         this.dialog = false
@@ -167,9 +177,29 @@ import firebase from '../../../Firebase'
 
       save () {
         if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
+
+          console.log('편집저장  내장인덱스: '+ this.editedIndex+'<------->' + this.itemkey)
+          //Object.assign(this.desserts[this.editedIndex], this.editedItem)
+
+          this.ref.doc(this.itemkey).set(this.editedItem)
+.then(function() {
+    console.log("Document successfully written!")
+})
+.catch(function(error) {
+    console.error("Error writing document: ", error)
+})
+
         } else {
-          this.desserts.push(this.editedItem)
+          //console.log('새로저장')
+          //this.desserts.push(this.editedItem)
+          this.ref.add(this.editedItem)
+                  .then(function(docRef) {
+                      console.log("Document written with ID: ", docRef.id);
+                    })
+                        .catch(function(error) {
+                                console.error("Error adding document: ", error);
+                              });
+
         }
         this.close()
       }
